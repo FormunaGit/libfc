@@ -234,9 +234,9 @@ LibFC["Nodes"] = {
 		return {
 			Name = "Hitbox",
 			Properties = {
-				size = size,
-				offset = offset,
-				onhit = onhit,
+				Size = size,
+				Offset = offset,
+				OnHit = onhit,
 			}
 		}
 	end,
