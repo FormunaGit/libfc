@@ -230,13 +230,14 @@ LibFC["Nodes"] = {
 	@param offset The offset of the hitbox.
 	@param onhit The branch to run when the hitbox hits something. This branch will be ran on every person hit.
 	]=]
-	Hitbox = function(size: Vector3, offset: CFrame, onhit: {Node}): Node
+	Hitbox = function(size: Vector3, offset: CFrame, onhit: {Node}, delay: number?): Node
 		return {
 			Name = "Hitbox",
 			Properties = {
 				Size = size,
 				Offset = offset,
 				OnHit = onhit,
+				["Delay"] = delay or 0,
 			}
 		}
 	end,
