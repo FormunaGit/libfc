@@ -25,9 +25,13 @@ type CharacterData = {
 		Melee: { Move },
 		Skill: { Move },
 		Special: { Move },
+		Dash: Move?,
 	},
 
-	CreateMove: (self: CharacterData, move: Move) -> Move,
+	CreateSkill:   (self: CharacterData, move: Move) -> boolean,
+	CreateMelee:   (self: CharacterData, move: Move) -> boolean,
+	CreateSpecial: (self: CharacterData, move: Move) -> boolean,
+	SetDash:       (self: CharacterData, move: Move) -> boolean,
 }
 
 export type Character = typeof(setmetatable({} :: CharacterData, LibFC.CharacterAPI))
@@ -223,7 +227,7 @@ LibFC["Nodes"] = {
 			},
 		}
 	end,
-	
+
 	--[=[
 	Create a hitbox.
 	@param size The size of the hitbox.
@@ -262,11 +266,27 @@ function LibFC.CharacterAPI.new(name: string, maxHealth: number?, walkSpeed: num
 			Melee = {},
 			Skill = {},
 			Special = {},
+			Dash = nil,
 		},
 
-		CreateMove = function(self: CharacterData, Move: Move): Move
+		CreateSkill = function(self, Move)
 			table.insert(self.Moves.Skill, Move)
-			return Move
+			return true
+		end,
+		
+		CreateMelee = function(self, Move)
+			table.insert(self.Moves.Melee, Move)
+			return true
+		end,
+		
+		CreateSpecial = function(self, Move)
+			table.insert(self.Moves.Special, Move)
+			return true
+		end,
+		
+		SetDash = function(self, Move)
+			self.Moves.Dash = Move
+			return true
 		end,
 	}
 
